@@ -1,77 +1,47 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
-using namespace std;
+#include "common.h"
 
+void Merge(vector<int>& arr, int start, int mid, int end)
+{
+	// arr[end] is the last element.
+	vector<int> left(arr.begin() + start, arr.begin() + mid + 1);
+	vector<int> right(arr.begin() + mid + 1, arr.begin() + end + 1);
 
-// 总时间复杂度 O(NlogN), 空间复杂度O(N)
-template <typename T>
-void merge(vector<T> &arr, int start, int mid, int end){
-    vector<T> left, right;  // 空间复杂度贡献 O(N)
-    for(int i=start; i<=mid; i++){
-        left.push_back(arr[i]);
-    }
-    for(int i=mid+1; i<=end; i++){
-        right.push_back(arr[i]);
-    }
-
-    int i_left=0, i_right=0;
-    int len_left=left.size(), len_right=right.size();
-    for (int k=start; k<=end; k++){
-        if (i_left == len_left){
-            while(i_right<len_right){
-                arr[k++] = right[i_right++];
-            }
-        } else if (i_right == len_right){
-            while(i_left<len_left){
-                arr[k++] = left[i_left++];
-            }
-        } else {
-            if (left[i_left] <= right[i_right]){
-                arr[k] = left[i_left++];
-            } else {
-                arr[k] = right[i_right++];
-            }
-        }
-    }
+	size_t pos = start, i = 0, j = 0;
+	while (i < left.size() && j < right.size())
+	{
+		if (left[i] < right[j])
+		{
+			arr[pos++] = left[i++];
+		}
+		else
+		{
+			arr[pos++] = right[j++];
+		}
+	}
+	while (i < left.size())
+	{
+		arr[pos++] = left[i++];
+	}
+	while (j < right.size())
+	{
+		arr[pos++] = right[j++];
+	}
 }
 
-template <typename T>
-void merge_sort(vector<T> &arr, int start, int end){
-    if (start < end){
-        int mid = (start+end)/2;
-        merge_sort<T>(arr, start, mid);  // 递归调用，空间复杂度贡献 O(logN)
-        merge_sort<T>(arr, mid+1, end);
-        merge<T>(arr, start, mid, end);
-    }
+void MergeSort(vector<int>& arr, int start, int end)
+{
+	if (start < end)
+	{
+		int mid = (start + end) / 2;
+		MergeSort(arr, start, mid);
+		MergeSort(arr, mid + 1, end);
+		Merge(arr, start, mid, end);
+	}
 }
 
-void print_vector(vector<auto> const &arr);
-
-int main(){
-    string line;
-    cout << "Enter a int sequence: ";
-    getline(cin, line);
-    istringstream iss(line);
-
-    int input;
-    vector<int> arr;
-    while(iss >> input){
-        arr.push_back(input);
-    }
-
-    merge_sort<int>(arr, 0, arr.size()-1);
-
-    cout << "After merge sort: ";
-    print_vector(arr);
-    getchar();
-}
-
-void print_vector(vector<auto> const &arr){
-    for (auto i: arr){
-        cout << i << " ";
-    }
-    cout << endl;
-}
-
+//int main()
+//{
+//	vector<int> arr{ 9,7,6,4,8,3,8,11,29,0,99 };
+//	MergeSort(arr, 0, arr.size() - 1);
+//	Print(arr);
+//}

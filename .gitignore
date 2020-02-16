@@ -340,5 +340,4 @@ ASALocalRun/
 healthchecksdb
 
 # visual studio files
-*.vcxproj.filters
 *.vcxproj.user
