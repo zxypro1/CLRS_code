@@ -138,6 +138,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="c02-big_num_add.cpp" />
+    <ClCompile Include="c02-find_two_sum_s_merge_sort.cpp" />
+    <ClCompile Include="c02-find_two_sum_s_unordered_map.cpp" />
+    <ClCompile Include="c02-insertion_sort.cpp" />
+    <ClCompile Include="c02-merge_sort.cpp" />
+    <ClCompile Include="c04-find_max_subarray.cpp" />
+    <ClCompile Include="c06-heap_sort.cpp" />
+    <ClCompile Include="c06-priority_queue.cpp" />
+    <ClCompile Include="c07-fuzz_quick_sort.cpp" />
+    <ClCompile Include="c07-hoare_quick_sort.cpp" />
+    <ClCompile Include="c07-quick_sort.cpp" />
+    <ClCompile Include="c07-quick_sort_plus.cpp" />
+    <ClCompile Include="c07-quick_sort_plus_mod.cpp" />
+    <ClCompile Include="c07-tail_quick_sort.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
