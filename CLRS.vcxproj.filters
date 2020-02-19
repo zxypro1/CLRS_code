@@ -7,6 +7,9 @@
     <ClCompile Include="c02-merge_sort.cpp" />
     <ClCompile Include="c02-find_sum_using_sort.cpp" />
     <ClCompile Include="c02-find_sum_using_set.cpp" />
+    <ClCompile Include="c04-find_max_subarray.cpp" />
+    <ClCompile Include="c06-heap_sort.cpp" />
+    <ClCompile Include="c06-priority_queue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />

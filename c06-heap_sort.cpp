@@ -1,93 +1,80 @@
-#include <iostream>
-#include <string>
-#include <sstream>
 #include <vector>
+#include "common.h"
 using namespace std;
 
-void print_vector(vector<auto> const & arr);
-
-void heapify_circulation(vector<auto> &arr, int pos, int max_index){
-    int left_index, right_index, next_pos;
-    while(1){
-        int left_index = 2 * pos + 1;
-        int right_index = 2 * pos + 2;
-        int next_pos = pos;
-        auto tmp = arr[pos];
-        if(left_index <= max_index && arr[left_index] > arr[next_pos]){
-            next_pos = left_index;
-        }
-        if(right_index <= max_index && arr[right_index] > arr[next_pos]){
-            next_pos = right_index;
-        }
-        if(next_pos == pos){
-            break;
-        } else {
-            tmp = arr[pos];
-            arr[pos] = arr[next_pos];
-            arr[next_pos] = tmp;
-            pos = next_pos;
-        }
-    }
+// 循环方式调整堆
+void Heapify2(vector<int>& arr, int pos, int max_index)
+{
+	int left, right, tmp, max;
+	while (true)
+	{
+		max = pos;
+		left = 2 * pos + 1;
+		right = 2 * pos + 2;
+		if (left <= max_index && arr[left] > arr[max])
+		{
+			max = left;
+		}
+		if (right <= max_index && arr[right] > arr[max])
+		{
+			max = right;
+		}
+		if (max == pos)
+		{
+			break;
+		}
+		tmp = arr[pos];
+		arr[pos] = arr[max];
+		arr[max] = tmp;
+		pos = max;
+	}
 }
 
-void heapify_recursively(vector<auto> & arr, int pos, int max_index){
-    int left_index = 2*pos + 1;
-    int right_index = 2*pos + 2;
-    int next_pos = pos;
-    if(left_index <= max_index && arr[left_index] > arr[next_pos]){
-        next_pos = left_index;
-    }
-    if(right_index <= max_index && arr[right_index] > arr[next_pos]){
-        next_pos = right_index;
-    }
-    if(pos != next_pos){
-        auto tmp = arr[pos];
-        arr[pos] = arr[next_pos];
-        arr[next_pos] = tmp;
-        heapify_recursively(arr, next_pos, max_index);
-    }
+// 递归方式调整堆
+void Heapify(vector<int >& arr, int pos, int max_index)
+{
+	int left = 2 * pos + 1;
+	int right = 2 * pos + 2;
+	int max = pos;
+	if (left <= max_index && arr[left] > arr[max])
+	{
+		max = left;
+	}
+	if (right <= max_index && arr[right] > arr[max])
+	{
+		max = right;
+	}
+	if (pos != max)
+	{
+		int tmp = arr[pos];
+		arr[pos] = arr[max];
+		arr[max] = tmp;
+		Heapify(arr, max, max_index);
+	}
 }
 
-void build_heap(vector<auto> & arr){ß
-    // 建堆过程虽然对N/2个节点进行了可能的调整，但越在前面的元素，需比较的次数越少，
-    // 且比较次数少的占大头，最后累计求和起来，复杂度只有O(N)
-    int last_not_leaf_index = arr.size()/2 - 1;
-    for(int i=last_not_leaf_index; i>=0; i--){
-        heapify_recursively(arr, i, arr.size()-1);
-    }
+void HeapSort(vector<int>& arr)
+{
+	// 建堆
+	for (int i = arr.size() / 2 - 1; i >= 0; i--)
+	{
+		Heapify(arr, i, arr.size() - 1);
+	}
+
+	// 排序
+	int tmp;
+	for (int i = arr.size() - 1; i >= 1; i--)
+	{
+		tmp = arr[0];
+		arr[0] = arr[i];
+		arr[i] = tmp;
+		Heapify2(arr, 0, i - 1);
+	}
 }
 
-void heap_sort(vector<auto> &arr){
-    build_heap(arr);
-    auto tmp = arr[0];
-    for(int i=arr.size()-1; i>=1; i--){
-        tmp = arr[0];
-        arr[0] = arr[i];
-        arr[i] = tmp;
-        heapify_circulation(arr, 0, i-1);
-    }
-}
-
-int main(){
-    string line;
-    cout << "Enter a price sequence:(must contain positive number) " << endl;
-    getline(cin, line);
-    istringstream iss(line);
-
-    int input;
-    vector<int> arr;
-    while(iss >> input){
-        arr.push_back(input);
-    }
-
-    heap_sort(arr);
-    cout << "After sorted:" << endl;
-    print_vector(arr);
-}
-
-void print_vector(vector<auto> const & arr){
-    for(auto i:arr){
-        cout << i << " ";
-    }
-    cout << endl;
-}
+//int main()
+//{
+//	vector<int> tmp{9, 8, 7, 6, 17, 1};
+//	HeapSort(tmp);
+//	Print(tmp);
+//}

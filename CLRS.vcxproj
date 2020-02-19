@@ -143,6 +143,9 @@
     <ClCompile Include="c02-find_sum_using_set.cpp" />
     <ClCompile Include="c02-insert_sort.cpp" />
     <ClCompile Include="c02-merge_sort.cpp" />
+    <ClCompile Include="c04-find_max_subarray.cpp" />
+    <ClCompile Include="c06-heap_sort.cpp" />
+    <ClCompile Include="c06-priority_queue.cpp" />
     <ClCompile Include="common.cpp" />
   </ItemGroup>
   <ItemGroup>
