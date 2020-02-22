@@ -1,5 +1,7 @@
 #include "common.h"
 
+using std::vector;
+
 void Merge(vector<int> &arr, int start, int mid, int end)
 {
 	// arr[end] is the last element.

@@ -1,101 +1,83 @@
 #include <iostream>
-#include <sstream>
-#include <string>
-#include <vector>
-#include <cstdlib>
 #include <tuple>
+#include <random>
+#include <algorithm>
+#include "common.h"
 
 using namespace std;
 
-typedef struct
+struct Interval // 区间定义
 {
-    int small;
-    int big;
-} node;
+	int from;
+	int to;
 
-void print_node_vector(vector<node> const &arr);
+	Interval(int a, int b) : from(min(a, b)), to(max(a, b)) {}
 
-tuple<int, int> fuzz_partition(vector<node> &arr, int start, int end)
+	friend ostream &operator<<(ostream &os, const Interval &self)
+	{
+		os << "[" << self.from << ", " << self.to << "] ";
+		return os;
+	}
+};
+
+tuple<int, int> FuzzPartition(vector<Interval> &arr, int start, int end)
 {
-	node pivot = arr[end];
+	// [start, p1] < pivot (p1, p2) ≈ pivit [p2, end] > pivot
+	Interval pivot = arr[end];
 	int p1 = start - 1, p2 = end + 1;
-	int pointer = start;
-	while (pointer < p2){
-		if(arr[pointer].big < pivot.small)
+	int cur = start;
+	while (cur < p2)
+	{
+		if (arr[cur].to < pivot.from)
 		{
 			p1++;
-			node tmp = arr[pointer];
-			arr[pointer] = arr[p1];
+			Interval tmp = arr[cur];
+			arr[cur] = arr[p1];
 			arr[p1] = tmp;
-			pointer++;
+			cur++;
 		}
-		else if(arr[pointer].small > pivot.big)
+		else if (arr[cur].from > pivot.to)
 		{
 			p2--;
-			node tmp = arr[pointer];
-			arr[pointer] = arr[p2];
+			Interval tmp = arr[cur];
+			arr[cur] = arr[p2];
 			arr[p2] = tmp;
 		}
 		else
-		{
-			pivot.small = max(arr[pointer].small, pivot.small);
-			pivot.big = min(arr[pointer].big, pivot.big);
-			pointer ++;
+		{ // 取交集，更新pivot，用核心区域（交集）保证有序
+			pivot.from = max(arr[cur].from, pivot.from);
+			pivot.to = min(arr[cur].to, pivot.to);
+			cur++;
 		}
 	}
 	return make_tuple(p1, p2);
 }
 
-void fuzz_quick_sort(vector<node> &arr, int start, int end)
+void FuzzQuickSort(vector<Interval> &arr, int start, int end)
 {
 	int p1, p2;
 	while (start < end)
 	{
-		tie(p1, p2) = fuzz_partition(arr, start, end);
-		if(p1-start < end-p2)
-		{
-			fuzz_quick_sort(arr, start, p1);
-			start = p2;
-		}
-		else
-		{
-			fuzz_quick_sort(arr, p2, end);
-			end = p1;
-		}
+		tie(p1, p2) = FuzzPartition(arr, start, end); // [start, p1] < pivot (p1, p2) ≈ pivit [p2, end] > pivot
+		FuzzQuickSort(arr, start, p1);
+		start = p2;
 	}
 }
 
 int main()
 {
-	vector<node> arr;
-	cout << "Enter random seed: ";
-	unsigned seed;
-	cin >> seed;
-	srand(seed);
-	for(int i=0; i<10; i++)
-	{
-		int a = rand() % 6;
-		int b = rand() % 10;
-		if (a > b)
-		{
-			int tmp = a;
-			a = b;
-			b = tmp;
-		}
-		node item = {a, b};
-		arr.push_back(item);
-	}
-	print_node_vector(arr);
-	fuzz_quick_sort(arr, 0, arr.size()-1);
-	cout << "After fuzz sort: " << endl;
-	print_node_vector(arr);
-}
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distr0_5(0, 5);
+	std::uniform_int_distribution<int> distr0_9(0, 9);
 
-void print_node_vector(vector<node> const &arr)
-{
-	for (node i : arr)
+	vector<Interval> arr;
+	for (int i = 0; i < 10; i++)
 	{
-		cout << "[" << i.small << ", " << i.big << "] ";
+		arr.emplace_back(Interval(distr0_5(gen), distr0_9(gen)));
 	}
-	cout << endl;
+	Print(arr);
+	FuzzQuickSort(arr, 0, arr.size() - 1);
+	cout << "After fuzz sort: " << endl;
+	Print(arr);
 }
