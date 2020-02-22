@@ -1,6 +1,6 @@
 #include "common.h"
 
-void Merge(vector<int>& arr, int start, int mid, int end)
+void Merge(vector<int> &arr, int start, int mid, int end)
 {
 	// arr[end] is the last element.
 	vector<int> left(arr.begin() + start, arr.begin() + mid + 1);
@@ -28,7 +28,7 @@ void Merge(vector<int>& arr, int start, int mid, int end)
 	}
 }
 
-void MergeSort(vector<int>& arr, int start, int end)
+void MergeSort(vector<int> &arr, int start, int end)
 {
 	if (start < end)
 	{
@@ -39,9 +39,9 @@ void MergeSort(vector<int>& arr, int start, int end)
 	}
 }
 
-//int main()
-//{
-//	vector<int> arr{ 9,7,6,4,8,3,8,11,29,0,99 };
-//	MergeSort(arr, 0, arr.size() - 1);
-//	Print(arr);
-//}
+int main()
+{
+	vector<int> arr{9, 7, 6, 4, 8, 3, 8, 11, 29, 0, 99};
+	MergeSort(arr, 0, arr.size() - 1);
+	Print(arr);
+}

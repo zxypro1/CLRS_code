@@ -1,21 +1,39 @@
 #include <vector>
+#include <climits>
 using namespace std;
 
-// 利用大根堆，实现优先队列
-void heapify(vector<int>& arr, int pos, int max_index)
+// copy from c06-heap_sort.cpp
+void Heapify(vector<int> &arr, int pos, int max_index)
 {
-	// See c06-heap_sort.cpp for detail.
+	int left = 2 * pos + 1;
+	int right = 2 * pos + 2;
+	int max = pos;
+	if (left <= max_index && arr[left] > arr[max])
+	{
+		max = left;
+	}
+	if (right <= max_index && arr[right] > arr[max])
+	{
+		max = right;
+	}
+	if (pos != max)
+	{
+		int tmp = arr[pos];
+		arr[pos] = arr[max];
+		arr[max] = tmp;
+		Heapify(arr, max, max_index);
+	}
 }
 
-int Dequeue(vector<int>& arr)
+int Dequeue(vector<int> &arr)
 {
 	int ret = arr[0];
 	arr[0] = arr[arr.size() - 1];
-	heapify(arr, 0, arr.size() - 2);
+	Heapify(arr, 0, arr.size() - 2);
 	return ret;
 }
 
-void Enqueue(vector<int>& arr, int value)
+void Enqueue(vector<int> &arr, int value)
 {
 	arr.push_back(INT_MIN);
 	int pos = arr.size() - 1;

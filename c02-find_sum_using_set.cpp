@@ -1,9 +1,9 @@
 #include <vector>
-#include<iostream>
+#include <iostream>
 #include <unordered_set>
 using namespace std;
 
-bool FindSum2(vector<int>& numbers, int target)
+bool FindSum2(vector<int> &numbers, int target)
 {
 	bool found = false;
 	unordered_set<int> s;
@@ -11,7 +11,7 @@ bool FindSum2(vector<int>& numbers, int target)
 	{
 		s.insert(i);
 	}
-	for (int i: numbers)
+	for (int i : numbers)
 	{
 		if (s.find(target - i) != s.end())
 		{
@@ -21,8 +21,8 @@ bool FindSum2(vector<int>& numbers, int target)
 	return false;
 }
 
-//int main()
-//{
-//	vector<int> arr{ 9,7,6,4,8,3,8,11,29,0,99 };
-//	cout << FindSum2(arr, 40) << ' ' << FindSum2(arr, 1) << endl;
-//}
+int main()
+{
+	vector<int> arr{9, 7, 6, 4, 8, 3, 8, 11, 29, 0, 99};
+	cout << FindSum2(arr, 40) << ' ' << FindSum2(arr, 1) << endl;
+}

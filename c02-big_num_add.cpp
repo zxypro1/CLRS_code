@@ -36,8 +36,8 @@ string BigNumAdd(string a, string b)
 	return ans;
 }
 
-//int main()
-//{
-//	std::cout << BigNumAdd("99999999999999999999999", "8888888888888888888888888") << std::endl;
-//	return 0;
-//}
+int main()
+{
+	std::cout << BigNumAdd("99999999999999999999999", "8888888888888888888888888") << std::endl;
+	return 0;
+}

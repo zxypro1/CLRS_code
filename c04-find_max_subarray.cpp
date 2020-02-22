@@ -2,10 +2,11 @@
 #include <sstream>
 #include <string>
 #include <tuple>
+#include <climits>
 #include <vector>
 using namespace std;
 
-tuple<int, int, int> FindMaxCrossingSubarray(const vector<int>& arr, int low, int mid, int high)
+tuple<int, int, int> FindMaxCrossingSubarray(const vector<int> &arr, int low, int mid, int high)
 {
 	int left_index = mid, right_index = mid + 1;
 	int tmp, left_sum = INT_MIN, right_sum = INT_MIN;
@@ -36,7 +37,7 @@ tuple<int, int, int> FindMaxCrossingSubarray(const vector<int>& arr, int low, in
 	return make_tuple(left_index, right_index, left_sum + right_sum);
 }
 
-tuple<int, int, int> FindMaxSubarray(const vector<int>& arr, int low, int high)
+tuple<int, int, int> FindMaxSubarray(const vector<int> &arr, int low, int high)
 {
 	if (low == high)
 	{
@@ -61,21 +62,21 @@ tuple<int, int, int> FindMaxSubarray(const vector<int>& arr, int low, int high)
 	}
 }
 
-//int main()
-//{
-//	string line;
-//	cout << "Enter a price sequence:(must contain positive number) " << endl;
-//	getline(cin, line);
-//	istringstream iss(line);
-//
-//	int input;
-//	vector<int> arr;
-//	while (iss >> input)
-//	{
-//		arr.push_back(input);
-//	}
-//
-//	int low, high, sum;
-//	tie(low, high, sum) = FindMaxSubarray(arr, 0, arr.size() - 1);
-//	cout << "Max sum: " << sum << " at (" << low << ", " << high << ")" << endl;
-//}
+int main()
+{
+	string line;
+	cout << "Enter a price sequence:(must contain positive number) " << endl;
+	getline(cin, line);
+	istringstream iss(line);
+
+	int input;
+	vector<int> arr;
+	while (iss >> input)
+	{
+		arr.push_back(input);
+	}
+
+	int low, high, sum;
+	tie(low, high, sum) = FindMaxSubarray(arr, 0, arr.size() - 1);
+	cout << "Max sum: " << sum << " at (" << low << ", " << high << ")" << endl;
+}

@@ -3,7 +3,7 @@
 using namespace std;
 
 // 循环方式调整堆
-void Heapify2(vector<int>& arr, int pos, int max_index)
+void Heapify2(vector<int> &arr, int pos, int max_index)
 {
 	int left, right, tmp, max;
 	while (true)
@@ -31,7 +31,7 @@ void Heapify2(vector<int>& arr, int pos, int max_index)
 }
 
 // 递归方式调整堆
-void Heapify(vector<int >& arr, int pos, int max_index)
+void Heapify(vector<int> &arr, int pos, int max_index)
 {
 	int left = 2 * pos + 1;
 	int right = 2 * pos + 2;
@@ -53,7 +53,7 @@ void Heapify(vector<int >& arr, int pos, int max_index)
 	}
 }
 
-void HeapSort(vector<int>& arr)
+void HeapSort(vector<int> &arr)
 {
 	// 建堆
 	for (int i = arr.size() / 2 - 1; i >= 0; i--)
@@ -72,9 +72,9 @@ void HeapSort(vector<int>& arr)
 	}
 }
 
-//int main()
-//{
-//	vector<int> tmp{9, 8, 7, 6, 17, 1};
-//	HeapSort(tmp);
-//	Print(tmp);
-//}
+int main()
+{
+	vector<int> tmp{9, 8, 7, 6, 17, 1};
+	HeapSort(tmp);
+	Print(tmp);
+}

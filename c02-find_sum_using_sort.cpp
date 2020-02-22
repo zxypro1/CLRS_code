@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-bool FindSum(vector<int>& arr, int sum)
+bool FindSum(vector<int> &arr, int sum)
 {
 	sort(arr.begin(), arr.end());
 	size_t i = 0, j = arr.size() - 1;
@@ -25,8 +25,8 @@ bool FindSum(vector<int>& arr, int sum)
 	return false;
 }
 
-//int main()
-//{
-//	vector<int> arr{ 9,7,6,4,8,3,8,11,29,0,99 };
-//	cout << FindSum(arr, 40) << ' ' << FindSum(arr, 1) << endl;
-//}
+int main()
+{
+	vector<int> arr{9, 7, 6, 4, 8, 3, 8, 11, 29, 0, 99};
+	cout << FindSum(arr, 40) << ' ' << FindSum(arr, 1) << endl;
+}
