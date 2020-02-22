@@ -20,9 +20,13 @@ struct Interval // 区间定义
 	}
 };
 
-tuple<int, int> FuzzPartition(vector<Interval> &arr, int start, int end)
+void FuzzQuickSort(vector<Interval> &arr, int start, int end)
 {
-	// [start, p1] < pivot (p1, p2) ≈ pivit [p2, end] > pivot
+	if (start >= end)
+	{
+		return;
+	}
+
 	Interval pivot = arr[end];
 	int p1 = start - 1, p2 = end + 1;
 	int cur = start;
@@ -50,18 +54,10 @@ tuple<int, int> FuzzPartition(vector<Interval> &arr, int start, int end)
 			cur++;
 		}
 	}
-	return make_tuple(p1, p2);
-}
 
-void FuzzQuickSort(vector<Interval> &arr, int start, int end)
-{
-	int p1, p2;
-	while (start < end)
-	{
-		tie(p1, p2) = FuzzPartition(arr, start, end); // [start, p1] < pivot (p1, p2) ≈ pivit [p2, end] > pivot
-		FuzzQuickSort(arr, start, p1);
-		start = p2;
-	}
+	// now [start, p1] < pivot (p1, p2) ≈ pivit [p2, end] > pivot
+	FuzzQuickSort(arr, start, p1);
+	FuzzQuickSort(arr, p2, end);
 }
 
 int main()

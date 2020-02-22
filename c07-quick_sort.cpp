@@ -1,66 +1,31 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <vector>
+#include "common.h"
+
 using namespace std;
 
-void print_vector(vector<int> const &arr);
-
-int partition(vector<int> &arr, int start, int end)
+void QuickSort(vector<int> &nums, int l, int r)
 {
-	int element = arr[end];
-	int tmp = element;
-	int i = start - 1;
-	for (int j = start; j <= end; j++)
-	{
-		if (arr[j] <= element)
+	if (l >= r)
+		return;
+	int i = l; // cursor for final pivot location
+	for (int j = l; j <= r - 1; j++)
+	{ // nums[r] is chosen as the pivot
+		if (nums[j] <= nums[r])
 		{
-			i += 1;
-			if (i < j)
-			{
-				tmp = arr[j];
-				arr[j] = arr[i];
-				arr[i] = tmp;
-			}
+			swap(nums[i], nums[j]);
+			i++; // smaller or equal elements go to the left of i
 		}
 	}
-	return i;
-}
-
-void quick_sort(vector<int> &arr, int start, int end)
-{
-	if (start < end)
-	{
-		int mid = partition(arr, start, end);
-		quick_sort(arr, start, mid - 1);
-		quick_sort(arr, mid + 1, end);
-	}
+	Swap(nums[i], nums[r]); // after swap, the pivot is nums[i]
+	QuickSort(nums, l, i - 1);
+	QuickSort(nums, i + 1, r);
 }
 
 int main()
 {
-	string line;
-	cout << "Enter a sequence " << endl;
-	getline(cin, line);
-	istringstream iss(line);
 
-	int input;
-	vector<int> arr;
-	while (iss >> input)
-	{
-		arr.push_back(input);
-	}
-
-	quick_sort(arr, 0, arr.size() - 1);
+	vector<int> arr{9, 7, 6, 4, 8, 3, 8, 11, 29, 0, 99};
+	Print(arr);
+	QuickSort(arr, 0, arr.size() - 1);
 	cout << "After sorted:" << endl;
-	print_vector(arr);
-}
-
-void print_vector(vector<int> const &arr)
-{
-	for (int i : arr)
-	{
-		cout << i << " ";
-	}
-	cout << endl;
+	Print(arr);
 }

@@ -14,4 +14,6 @@ add_executable(c06-heap_sort c06-heap_sort.cpp)
 
 add_library(c06-priority_queue c06-priority_queue.cpp)
 
-add_executable(c07-fuzz_quick_sort c07-fuzz_quick_sort.cpp)
+add_executable(c07-quick_sort_interval c07-quick_sort_interval.cpp)
+
+add_executable(c07-quick_sort c07-quick_sort.cpp)
