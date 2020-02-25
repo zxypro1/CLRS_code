@@ -17,3 +17,5 @@ add_library(c06-priority_queue c06-priority_queue.cpp)
 add_executable(c07-quick_sort_interval c07-quick_sort_interval.cpp)
 
 add_executable(c07-quick_sort c07-quick_sort.cpp)
+
+add_executable(c08-counting_sort c08-counting_sort.cpp)
