@@ -19,3 +19,7 @@ add_executable(c07-quick_sort_interval c07-quick_sort_interval.cpp)
 add_executable(c07-quick_sort c07-quick_sort.cpp)
 
 add_executable(c08-counting_sort c08-counting_sort.cpp)
+
+add_executable(c08-bucket_sort c08-bucket_sort.cpp)
+
+add_executable(c09-quick_select c09-quick_select.cpp)
