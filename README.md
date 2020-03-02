@@ -27,7 +27,6 @@
   - 快速选择
 
 - chapter 10 基本数据结构
-  - 带父节点的o(1)空间复杂度二叉树中序遍历
   - 普通二叉树的遍历
 
 - chapter 12 二叉搜索树
@@ -47,3 +46,6 @@
 - chapter 16 贪心算法
   - 0-1 背包
   - 哈夫曼树
+
+## Old Version
+- [v0.1](https://github.com/skyduy/CLRS_code/tree/v0.1)
