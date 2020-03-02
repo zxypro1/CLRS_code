@@ -23,3 +23,5 @@ add_executable(c08-counting_sort c08-counting_sort.cpp)
 add_executable(c08-bucket_sort c08-bucket_sort.cpp)
 
 add_executable(c09-quick_select c09-quick_select.cpp)
+
+add_executable(c10-traverse_tree c10-traverse_tree.cpp)
