@@ -27,3 +27,7 @@ add_executable(c09-quick_select c09-quick_select.cpp)
 add_executable(c10-traverse_tree c10-traverse_tree.cpp)
 
 add_executable(c12-binary_tree c12-binary_tree.cpp)
+
+add_executable(c15-lcs_length c15-lcs_length.cpp)
+
+add_executable(c15-rot_cut c15-rot_cut.cpp)

@@ -12,7 +12,7 @@ struct Node
 
 vector<Node *> buckets(BUCKET_NUM, nullptr);
 
-void *Insert(int i, int val)
+void Insert(int i, int val)
 {
     Node *newNode = new Node(val);
     if (buckets[i] == nullptr)
