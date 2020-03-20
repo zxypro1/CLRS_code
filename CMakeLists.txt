@@ -32,4 +32,6 @@ add_executable(c15-lcs_length c15-lcs_length.cpp)
 
 add_executable(c15-rot_cut c15-rot_cut.cpp)
 
+add_executable(c16-01knapsack_problem c16-01knapsack_problem.cpp)
+
 add_executable(c16-huffman_tree c16-huffman_tree.cpp)
