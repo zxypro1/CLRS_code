@@ -1,3 +1,5 @@
+project(CLRS_code)
+
 add_executable(c02-big_num_add c02-big_num_add.cpp)
 
 add_executable(c02-find_sum_using_set c02-find_sum_using_set.cpp)

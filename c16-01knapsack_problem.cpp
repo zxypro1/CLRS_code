@@ -7,7 +7,7 @@ const int MAX = 5;
 
 void KnapsackProblem(int num, int values[], int cost[], int capacity)
 {
-    int dp[capacity + 1];
+    vector<int> dp(capacity + 1, 0);
     for (int i = 0; i <= capacity; i++)
     {
         dp[i] = 0; // 求最大值，而不是恰巧装满
