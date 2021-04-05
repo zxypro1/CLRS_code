@@ -1,5 +1,9 @@
+#include <cstdio>
+#include <type_traits>
 #include <vector>
 #include <climits>
+#include <iostream>
+#include <vector>
 using namespace std;
 
 // copy from c06-heap_sort.cpp
@@ -45,4 +49,13 @@ void Enqueue(vector<int> &arr, int value)
 		parent = (pos - 1) / 2;
 	}
 	arr[pos] = value;
+}
+
+int main(int argc, const char** argv) {
+	vector<int>obj;
+	int j=0;
+	while(cin>>j){
+		obj.push_back(j);
+	}
+	Enqueue(obj,8);
 }
