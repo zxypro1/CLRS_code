@@ -54,8 +54,8 @@ void Enqueue(vector<int> &arr, int value)
 int main(int argc, const char** argv) {
 	vector<int>obj;
 	int j=0;
-	while(cin>>j){
-		obj.push_back(j);
-	}
+	cin >> j;
+	cout << j << endl;
+	obj.push_back(j);
 	Enqueue(obj,8);
 }
